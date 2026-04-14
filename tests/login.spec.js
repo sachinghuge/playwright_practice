@@ -7,7 +7,7 @@ test("login test",async ({browser})=>{
     await page.locator('[id="email"]').fill("test@qabrains.com");
     await page.locator('[id="password"]').fill("Password123");
     await page.locator('[type="submit"]').click();
-    await expect(page.locator("text=Products")).toHaveText("Products");
+    await expect(page.locator("text=Products")).toHaveText("Products1");
 
 
 })
