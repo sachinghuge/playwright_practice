@@ -1,24 +1,49 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
+      with:
+        persist-credentials: true
+
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+
     - name: Install dependencies
       run: npm ci
+
     - name: Install Playwright Browsers
       run: npx playwright install chromium
+
     - name: Run Playwright tests
       run: npx playwright test
+
+    # ✅ NEW STEP: Commit screenshots to repo
+    - name: Commit test results
+      if: always()
+      run: |
+        mkdir -p artifacts
+        cp -r test-results/* artifacts/ || true
+
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+
+        git add artifacts
+        git commit -m "Add test screenshots [skip ci]" || echo "No changes to commit"
+        git push
+
+    # Existing artifact upload (kept)
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
