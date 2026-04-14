@@ -36,8 +36,8 @@ jobs:
         mkdir -p artifacts
         cp -r test-results/* artifacts/ || true
 
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
+        git config --global user.name "sachinghuge"
+        git config --global user.email "sachinghuge9604@gmail.com"
 
         git add artifacts
         git commit -m "Add test screenshots [skip ci]" || echo "No changes to commit"
