@@ -13,8 +13,7 @@ const config=defineConfig({
   use:{
     browserName:"chromium",
     screenshot:"only-on-failure",
-    video:"retain-on-failure",
-    headless:false
+    video:"retain-on-failure"
   }
 });
 
