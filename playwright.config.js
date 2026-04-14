@@ -9,6 +9,7 @@ const config=defineConfig({
   expect:{
     timeout:10*1000
   },
+  reporter:"html",
   use:{
     browserName:"chromium",
     screenshot:"only-on-failure",
